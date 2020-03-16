@@ -19,6 +19,12 @@
       "dom"
     ],
     "paths": {
+      "codehint-ng-tabs": [
+        "dist/codehint-ng-tabs"
+      ],
+      "codehint-ng-tabs/*": [
+        "dist/codehint-ng-tabs/*"
+      ]
     }
   },
   "angularCompilerOptions": {

@@ -124,6 +124,41 @@
           }
         }
       }
+    },
+    "codehint-ng-tabs": {
+      "projectType": "library",
+      "root": "projects/codehint-ng-tabs",
+      "sourceRoot": "projects/codehint-ng-tabs/src",
+      "prefix": "lib",
+      "architect": {
+        "build": {
+          "builder": "@angular-devkit/build-ng-packagr:build",
+          "options": {
+            "tsConfig": "projects/codehint-ng-tabs/tsconfig.lib.json",
+            "project": "projects/codehint-ng-tabs/ng-package.json"
+          }
+        },
+        "test": {
+          "builder": "@angular-devkit/build-angular:karma",
+          "options": {
+            "main": "projects/codehint-ng-tabs/src/test.ts",
+            "tsConfig": "projects/codehint-ng-tabs/tsconfig.spec.json",
+            "karmaConfig": "projects/codehint-ng-tabs/karma.conf.js"
+          }
+        },
+        "lint": {
+          "builder": "@angular-devkit/build-angular:tslint",
+          "options": {
+            "tsConfig": [
+              "projects/codehint-ng-tabs/tsconfig.lib.json",
+              "projects/codehint-ng-tabs/tsconfig.spec.json"
+            ],
+            "exclude": [
+              "**/node_modules/**"
+            ]
+          }
+        }
+      }
     }
   },
   "defaultProject": "codehint-ng-test-app"
