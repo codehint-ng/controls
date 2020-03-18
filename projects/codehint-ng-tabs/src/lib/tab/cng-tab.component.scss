@@ -4,9 +4,10 @@
   cursor: pointer;
   position: relative;
   bottom: 5px;
-  padding: 14px 12px 23px 12px;
+  padding: 4px 8px;
+  border: 1px solid lightgray;
 
   &.active {
-    background-color: #233954;
+    background-color: #d8e8fb;
   }
 }
