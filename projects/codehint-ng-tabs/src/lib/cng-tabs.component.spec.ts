@@ -1,20 +1,20 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { CodehintNgTabsComponent } from './codehint-ng-tabs.component';
+import { CngTabsComponent } from './cng-tabs.component';
 
 describe('CodehintNgTabsComponent', () => {
-  let component: CodehintNgTabsComponent;
-  let fixture: ComponentFixture<CodehintNgTabsComponent>;
+  let component: CngTabsComponent;
+  let fixture: ComponentFixture<CngTabsComponent>;
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ CodehintNgTabsComponent ]
+      declarations: [ CngTabsComponent ]
     })
     .compileComponents();
   }));
 
   beforeEach(() => {
-    fixture = TestBed.createComponent(CodehintNgTabsComponent);
+    fixture = TestBed.createComponent(CngTabsComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });
