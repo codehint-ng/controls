@@ -1,24 +1,28 @@
-# CodehintNgTabs
+# @codehint-ng/tabs
 
-This library was generated with [Angular CLI](https://github.com/angular/angular-cli) version 8.2.14.
+A simple flexible tabs Angular component to group content with tabs.
 
-## Code scaffolding
+## Usage
+1) Register the @codehint-ng/tabs in your module:
 
-Run `ng generate component component-name --project codehint-ng-tabs` to generate a new component. You can also use `ng generate directive|pipe|service|class|guard|interface|enum|module --project codehint-ng-tabs`.
-> Note: Don't forget to add `--project codehint-ng-tabs` or else it will be added to the default project in your `angular.json` file. 
+        import { CngTabsModule } from '@codehint-ng/tabs';
 
-## Build
+        @NgModule({
+        declarations: [
+            AppComponent
+        ],
+        imports: [
+            CngTabsModule,
+            ...
+        ],
+        ...
 
-Run `ng build codehint-ng-tabs` to build the project. The build artifacts will be stored in the `dist/` directory.
+2) Use components in your Angular application:
 
-## Publishing
+        <cng-tabs>
+          <cng-tab #tabFirst>First Tab Title</cng-tab>
+          <cng-tab #tabSecond>Second Tab Title</cng-tab>
+        </cng-tabs>
 
-After building your library with `ng build codehint-ng-tabs`, go to the dist folder `cd dist/codehint-ng-tabs` and run `npm publish`.
-
-## Running unit tests
-
-Run `ng test codehint-ng-tabs` to execute the unit tests via [Karma](https://karma-runner.github.io).
-
-## Further help
-
-To get more help on the Angular CLI use `ng help` or go check out the [Angular CLI README](https://github.com/angular/angular-cli/blob/master/README.md).
+        <div [cngTabContentOf]="tabFirst">First Tab Content</div>
+        <div [cngTabContentOf]="tabSecond">First Tab Content</div>
