@@ -1,9 +1,13 @@
 {
   "name": "@codehint-ng/tabs",
-  "version": "0.0.2",
+  "version": "0.0.3",
   "keywords": [
     "Angular"
   ],
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/codehint-ng/ng-controls"
+  },
   "peerDependencies": {
     "@angular/common": "^8.2.14",
     "@angular/core": "^8.2.14"

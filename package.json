@@ -1,6 +1,6 @@
 {
-  "name": "codehint-ng",
-  "version": "0.0.0",
+  "name": "@codehint-ng/ng-controls",
+  "version": "0.0.2",
   "scripts": {
     "ng": "ng",
     "start": "ng serve",
@@ -10,7 +10,13 @@
     "e2e": "ng e2e",
     "dev": "ng serve"
   },
-  "private": true,
+  "keywords": [
+    "Angular"
+  ],
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/codehint-ng/ng-controls"
+  },
   "dependencies": {
     "@angular/animations": "~8.2.14",
     "@angular/common": "~8.2.14",
