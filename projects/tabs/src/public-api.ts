@@ -1,5 +1,5 @@
 /*
- * Public API Surface of codehint-ng-tabs
+ * Public API Surface of tabs
  */
 
 export * from './lib/cng-tab-content-of.directive';

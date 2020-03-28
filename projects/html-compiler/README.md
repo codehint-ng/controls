@@ -33,13 +33,12 @@ A simple component to display dynamic Angular components.
   
 **!!!NOTE**
 To work correctly application in production, do not forget to register JitCompilerModule in your main app.module.
-The issue: Runtime compiler is not loaded. 
-Register the @codehint-ng/html-compiler in your module:
 
     import { JitCompilerModule } from '@codehint-ng/html-compiler';
             
      @NgModule({
          imports: [
+             // workaround: The issue: Runtime compiler is not loaded.   
              JitCompilerModule // !once only, !in main app.module only
                  ...
           ],
