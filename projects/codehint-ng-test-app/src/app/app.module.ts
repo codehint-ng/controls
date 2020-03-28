@@ -3,15 +3,15 @@ import { NgModule } from '@angular/core';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
-import {CngHtmlCompilerModule} from 'html-compiler';
 import {CngTabsModule} from 'codehint-ng-tabs';
+import {HtmlCompilerModule} from './html-compiler/html-compiler.module';
 
 @NgModule({
   imports: [
     BrowserModule,
     AppRoutingModule,
+    HtmlCompilerModule,
     CngTabsModule,
-    CngHtmlCompilerModule
   ],
   declarations: [
     AppComponent

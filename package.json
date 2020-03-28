@@ -8,7 +8,11 @@
     "test": "ng test",
     "lint": "ng lint",
     "e2e": "ng e2e",
-    "dev": "ng serve"
+    "dev": "ng serve",
+    "build_lib": "ng build html-compiler",
+    "npm_pack": "cd dist/html-compiler && npm pack",
+    "package": "npm run build_lib && npm run npm_pack"
+
   },
   "keywords": [
     "Angular"
