@@ -1,6 +1,6 @@
-# @codehint-ng/controls
+# @codehint-ng
 
 Simple and useful Angular controls to speed up development.
 
-[@codehint-ng/html-compiler](https://github.com/codehint-ng/ng-controls/tree/master/projects/html-compiler)  
-[@codehint-ng/tabs](https://github.com/codehint-ng/ng-controls/tree/master/projects/tabs)
+[html-compiler](https://github.com/codehint-ng/ng-controls/tree/master/projects/html-compiler)  
+[tabs](https://github.com/codehint-ng/ng-controls/tree/master/projects/tabs)
