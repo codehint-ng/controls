@@ -24,6 +24,12 @@
       ],
       "codehint-ng-tabs/*": [
         "dist/codehint-ng-tabs/*"
+      ],
+      "html-compiler": [
+        "dist/html-compiler"
+      ],
+      "html-compiler/*": [
+        "dist/html-compiler/*"
       ]
     }
   },

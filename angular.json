@@ -159,6 +159,41 @@
           }
         }
       }
+    },
+    "html-compiler": {
+      "projectType": "library",
+      "root": "projects/html-compiler",
+      "sourceRoot": "projects/html-compiler/src",
+      "prefix": "lib",
+      "architect": {
+        "build": {
+          "builder": "@angular-devkit/build-ng-packagr:build",
+          "options": {
+            "tsConfig": "projects/html-compiler/tsconfig.lib.json",
+            "project": "projects/html-compiler/ng-package.json"
+          }
+        },
+        "test": {
+          "builder": "@angular-devkit/build-angular:karma",
+          "options": {
+            "main": "projects/html-compiler/src/test.ts",
+            "tsConfig": "projects/html-compiler/tsconfig.spec.json",
+            "karmaConfig": "projects/html-compiler/karma.conf.js"
+          }
+        },
+        "lint": {
+          "builder": "@angular-devkit/build-angular:tslint",
+          "options": {
+            "tsConfig": [
+              "projects/html-compiler/tsconfig.lib.json",
+              "projects/html-compiler/tsconfig.spec.json"
+            ],
+            "exclude": [
+              "**/node_modules/**"
+            ]
+          }
+        }
+      }
     }
   },
   "defaultProject": "codehint-ng-test-app"
