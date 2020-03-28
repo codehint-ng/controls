@@ -1,28 +1,48 @@
 # @codehint-ng/html-compiler
 
-A simple flexible Angular component to to compile html code with Javascript objects dynamically.
+A simple component to display dynamic Angular components.
 
 ## Usage
-1) Register the @codehint-ng/tabs in your module:
 
-        import { CngTabsModule } from '@codehint-ng/tabs';
+**!!!NOTE** For production version see note below.
+
+1) Register the @codehint-ng/html-compiler in your module:
+
+        import { CngHtmlCompilerModule } from '@codehint-ng/html-compiler';
 
         @NgModule({
-        declarations: [
-            AppComponent
-        ],
         imports: [
-            CngTabsModule,
+            CngHtmlCompilerModule
             ...
         ],
         ...
 
-2) Use components in your Angular application:
+2) Define dynamic component (angular syntax):
 
-        <cng-tabs>
-          <cng-tab #tabFirst>First Tab Title</cng-tab>
-          <cng-tab #tabSecond>Second Tab Title</cng-tab>
-        </cng-tabs>
+       this.template = '<div>hello {{name}}</div> <button (click)="onEvent()">Test Event</button>';
+       this.componentClass = {
+           name: 'World!',
+           onEvent: () => { alert('this is event'); }
+        };
 
-        <div [cngTabContentOf]="tabFirst">First Tab Content</div>
-        <div [cngTabContentOf]="tabSecond">First Tab Content</div>
+3) Use cng-html-compiler to display dynamic component:
+           
+       <cng-html-compiler [template]="template"
+                          [componentClass]="componentClass">
+       </cng-html-compiler>
+  
+**!!!NOTE**
+To work correctly application in production, do not forget to register JitCompilerModule in your main app.module.
+The issue: Runtime compiler is not loaded. 
+Register the @codehint-ng/html-compiler in your module:
+
+    import { JitCompilerModule } from '@codehint-ng/html-compiler';
+            
+     @NgModule({
+         imports: [
+             JitCompilerModule // !once only, !in main app.module only
+                 ...
+          ],
+          ...
+      })
+      export class AppModule { }    

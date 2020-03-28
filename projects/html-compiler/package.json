@@ -1,6 +1,7 @@
 {
   "name": "@codehint-ng/html-compiler",
   "version": "1.0.0",
+  "license": "MIT",
   "keywords": [
     "Angular"
   ],
