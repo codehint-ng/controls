@@ -1,4 +1,5 @@
 import {Component, OnInit} from '@angular/core';
+import {CustomModule} from './custom/custom.module';
 
 @Component({
   selector: 'app-html-compiler',
@@ -8,12 +9,12 @@ import {Component, OnInit} from '@angular/core';
 export class HtmlCompilerComponent implements OnInit {
   template: string;
   componentClass: object;
-  imports = [];
+  imports = [CustomModule];
 
   constructor() {}
 
   ngOnInit(): void {
-    this.template = '<div>hello {{name}}</div> <button (click)="onEvent()">Test Event</button>';
+    this.template = '<div>hello {{name}}</div> <button (click)="onEvent()">Test Event</button><br /><app-custom></app-custom>';
     this.componentClass = {
       name: 'World!',
       onEvent: () => { alert('this is event'); }

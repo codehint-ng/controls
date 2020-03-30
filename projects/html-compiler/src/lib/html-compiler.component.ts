@@ -22,7 +22,7 @@ import {CommonModule} from '@angular/common';
 export class CngHtmlCompilerComponent  implements OnChanges {
   @Input() template = '';
   @Input() componentClass: object = {};
-  @Input() imports = [CommonModule];
+  @Input() imports = [];
 
   constructor(private compiler: Compiler, private container: ViewContainerRef) {}
 
@@ -35,10 +35,14 @@ export class CngHtmlCompilerComponent  implements OnChanges {
     if (changes.componentClass) {
       currentComponentClass = changes.componentClass.currentValue;
     }
-    this.addComponent(currentTemplate, currentComponentClass);
+    let currentImports = [CommonModule];
+    if (changes.imports.currentValue) {
+      currentImports = [...currentImports, ...changes.imports.currentValue];
+    }
+    this.addComponent(currentTemplate, currentComponentClass, currentImports);
   }
 
-  private addComponent(template: string, properties: any = {}) {
+  private addComponent(template: string, properties: any = {}, imports: any[]) {
     this.container.clear();
 
     // @Component({template})
@@ -53,7 +57,7 @@ export class CngHtmlCompilerComponent  implements OnChanges {
     const TemplateModule = NgModule({
       declarations: [TemplateComponent],
       entryComponents: [TemplateComponent],
-      imports: []})(class {});
+      imports: [...imports]})(class {});
 
     const module = this.compiler.compileModuleAndAllComponentsSync(TemplateModule);
     const factory = module.componentFactories.find((comp) =>
