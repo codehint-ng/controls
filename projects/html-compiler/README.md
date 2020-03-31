@@ -47,7 +47,7 @@ To work correctly application in production, do not forget to register JitCompil
       export class AppModule { }    
 
 **Addition**
-If you want to place in template string some Angular component (your own or third party) 
+1) If you want to place in template string some Angular component (your own or third party) 
 you need to add origin module into property imports component cng-html-compiler 
        
        this.template = '<my-or-third-party-component ...></my-or-third-party-component>';
@@ -62,4 +62,8 @@ And pass this parameter into cng-html-compiler:
                           [imports]="imports">
        </cng-html-compiler>
        
+2) Html Compiler allows to get rendered html also:
+        
+       @ViewChild(CngHtmlCompilerComponent, {static: true}) htmlCompilerComponent: CngHtmlCompilerComponent;
        
+       const sourceHtml = this.htmlCompilerComponent.getSourceHtml();

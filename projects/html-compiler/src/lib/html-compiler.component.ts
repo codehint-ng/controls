@@ -78,7 +78,11 @@ export class CngHtmlCompilerComponent  implements OnChanges {
   // outer functions, may be remade with store
   public getSourceHtml() {
     const viewRef: any /*ViewRef_*/ = this.container.get(0) as any /*ViewRef_*/;
-    const ngComponent = viewRef.rootNodes[0];
-    return ngComponent.innerHTML;
+    if (viewRef) {
+      const ngComponent = viewRef.rootNodes[0];
+      return ngComponent.innerHTML;
+    } else {
+      return 'not_rendered_yet';
+    }
   }
 }
