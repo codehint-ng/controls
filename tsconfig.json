@@ -30,6 +30,12 @@
       ],
       "html-compiler/*": [
         "dist/html-compiler/*"
+      ],
+      "dialog": [
+        "dist/dialog"
+      ],
+      "dialog/*": [
+        "dist/dialog/*"
       ]
     }
   },
