@@ -4,14 +4,16 @@ import { NgModule } from '@angular/core';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import {HtmlCompilerModule} from './html-compiler/html-compiler.module';
-import {CngTabsModule} from '../../../tabs/src/lib/cng-tabs.module';
+import {TabsModule} from './tabs/tabs.module';
+import {DialogModule} from './dialog/dialog.module';
 
 @NgModule({
   imports: [
     BrowserModule,
     AppRoutingModule,
     HtmlCompilerModule,
-    CngTabsModule,
+    TabsModule,
+    DialogModule
   ],
   declarations: [
     AppComponent
