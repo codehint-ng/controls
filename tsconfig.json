@@ -36,6 +36,12 @@
       ],
       "dialog/*": [
         "dist/dialog/*"
+      ],
+      "tree-table": [
+        "dist/tree-table"
+      ],
+      "tree-table/*": [
+        "dist/tree-table/*"
       ]
     }
   },
