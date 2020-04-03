@@ -5,12 +5,14 @@
       true,
       "attribute",
       "cng",
+      "app",
       "camelCase"
     ],
     "component-selector": [
       true,
       "element",
       "cng",
+      "app",
       "kebab-case"
     ]
   }

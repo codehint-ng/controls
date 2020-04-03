@@ -1,0 +1,42 @@
+table{
+  table-layout: fixed;
+  td, th{
+    overflow: hidden;
+    white-space: nowrap;
+    -moz-text-overflow: ellipsis;
+    -ms-text-overflow: ellipsis;
+    -o-text-overflow: ellipsis;
+    text-overflow: ellipsis;
+  }
+}
+
+table {
+  tbody {
+    tr {
+      td {
+        // border: 1px solid red;
+
+        .level-indent {
+          display: inline-block;
+          width: 22px;
+          border: green;
+        }
+
+        .tree-item-arrow {
+          cursor: pointer;
+          display: inline-block;
+          width: 22px;
+          height: 12px;
+          background: url(/assets/img/icons/arrow_up_blue.svg) center no-repeat;
+          background-size: 12px;
+          -webkit-transform: rotate(180deg);
+          transform: rotate(180deg);
+          &.expanded {
+            -webkit-transform: rotate(0deg);
+            transform: rotate(0deg);
+          }
+        }
+      }
+    }
+  }
+}

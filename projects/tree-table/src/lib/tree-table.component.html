@@ -1,3 +1,34 @@
-<p>
-  cng-tree-table works!
-</p>
+<table>
+  <thead>
+  <tr>
+    <th *ngFor="let column of columns; let last=last;"
+        [appResizableTableColumn]="!last"
+        class="tree-item-header"
+        [ngClass]="[column.thClass || '']">
+      {{column.titleTemplate ? '' : column.title}}
+      <ng-container *ngTemplateOutlet="column.titleTemplate; context: { $implicit: column.title }">
+      </ng-container>
+    </th>
+  </tr>
+  </thead>
+  <tbody>
+  <tr [ngClass]="{'selected': isSelected(shell)}"
+      *ngFor="let shell of treeTableItemShells"
+      [hidden]="!shell.isVisible" (click)="localRowClick(shell)">
+    <td [className]="'tree-item ' + (conditionalCellClassFunc ? conditionalCellClassFunc(shell.item, column) : '')"
+        *ngFor="let column of columns; let i = index;">
+      <ng-container *ngIf="i === 0">
+        <div class="level-indent" *ngFor="let foo of shell.level | appNumberToArray"></div>
+        <div *ngIf="shell.haveChildren" class="tree-item-arrow"
+             [ngClass]="{'expanded': shell.item.isExpanded}"
+             (click)="toggleExpand($event, shell)"
+        >
+        </div>
+      </ng-container>
+
+      <ng-container *ngTemplateOutlet="column.template; context: { $implicit: shell.item }">
+      </ng-container>
+    </td>
+  </tr>
+  </tbody>
+</table>
