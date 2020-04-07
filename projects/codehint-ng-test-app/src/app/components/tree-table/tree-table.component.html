@@ -1,3 +1,30 @@
 <h1>@codehint-ng/tree-table</h1>
 
-<cng-tree-table></cng-tree-table>
+<cng-tree-table
+  [columns]="[
+    {title: 'Column1', template: tmplColumn1},
+    {title: 'Column2', template: tmplColumn2},
+    {title: 'Column3', template: tmplColumn3}
+  ]"
+  [treeTableData]="treeTableData"
+  [sortFunction]="sortFunction"
+>
+</cng-tree-table>
+
+<ng-template #tmplColumn1 let-treeTableItem>
+  <ng-container *ngIf="treeTableItem.data as customObject">
+
+  </ng-container>
+</ng-template>
+
+<ng-template #tmplColumn2 let-treeTableItem>
+  <ng-container *ngIf="treeTableItem.data as customObject">
+
+  </ng-container>
+</ng-template>
+
+<ng-template #tmplColumn3 let-treeTableItem>
+  <ng-container *ngIf="treeTableItem.data as customObject">
+
+  </ng-container>
+</ng-template>

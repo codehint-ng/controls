@@ -75,7 +75,7 @@ export class CngTreeTableComponent<T>  implements OnChanges {
       levelItems = Helper.sortItems(levelItems, this.sortFunction);
     }
 
-    let newLevelShells = Helper.itemsToShells(levelItems, level, parent);
+    const newLevelShells = Helper.itemsToShells(levelItems, level, parent);
     this.treeTableItemShells = Helper.arrayInsertItems(this.treeTableItemShells, index, newLevelShells);
 
     this.otherItems = [...otherItems];
