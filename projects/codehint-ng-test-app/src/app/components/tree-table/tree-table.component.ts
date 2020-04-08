@@ -1,7 +1,7 @@
 import {Component, OnInit} from '@angular/core';
-import {SortFunction, TreeTableData} from 'tree-table';
 import {TreeTableDataMapper} from './data/tree-table-data.mapper';
 import {CustomData, CustomItem} from './data/custom.data';
+import {SortFunction, TreeTableData} from '../../../../../tree-table/src/lib/tree-table.component';
 
 @Component({
   selector: 'app-tree-table',

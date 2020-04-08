@@ -1,7 +1,8 @@
 import {NgModule} from '@angular/core';
 import {CommonModule} from '@angular/common';
 import {TreeTableComponent} from './tree-table.component';
-import {CngTreeTableModule} from 'tree-table';
+import {CngTreeTableModule} from '../../../../../tree-table/src/lib/tree-table.module';
+
 
 @NgModule({
   imports: [
