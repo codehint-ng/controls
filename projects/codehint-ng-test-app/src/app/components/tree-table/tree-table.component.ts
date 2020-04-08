@@ -1,7 +1,7 @@
 import {Component, OnInit} from '@angular/core';
 import {TreeTableDataMapper} from './data/tree-table-data.mapper';
 import {CustomData, CustomItem} from './data/custom.data';
-import {SortFunction, TreeTableData} from '../../../../../tree-table/src/lib/tree-table.component';
+import {SortFunction, TreeTableItem} from '../../../../../tree-table/src/lib/tree-table.component';
 
 @Component({
   selector: 'app-tree-table',
@@ -9,7 +9,7 @@ import {SortFunction, TreeTableData} from '../../../../../tree-table/src/lib/tre
   styleUrls: ['./tree-table.component.scss']
 })
 export class TreeTableComponent implements OnInit {
-  treeTableData: TreeTableData<CustomItem>;
+  treeTableItems: TreeTableItem<CustomItem>[];
   sortFunction: SortFunction<CustomItem>;
 
   constructor() {}
@@ -17,7 +17,7 @@ export class TreeTableComponent implements OnInit {
   ngOnInit(): void {
     const customData: CustomItem[] = CustomData.getData();
 
-    this.treeTableData = TreeTableDataMapper.customDataToTreeTableData(customData);
+    this.treeTableItems = TreeTableDataMapper.customDataToTreeTableItems(customData);
 
     this.sortFunction = (a: CustomData, b: CustomData) => {
       return 0;

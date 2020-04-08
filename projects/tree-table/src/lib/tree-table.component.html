@@ -22,7 +22,7 @@
         <div *ngIf="shell.haveChildren" class="tree-item-arrow"
              [ngClass]="{'expanded': shell.item.isExpanded}"
              (click)="toggleExpand($event, shell)"
-        >
+        ><div class="arrow"></div>
         </div>
       </ng-container>
 

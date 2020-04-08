@@ -1,4 +1,5 @@
 import {Component, EventEmitter, Input, OnChanges, Output, SimpleChanges, TemplateRef} from '@angular/core';
+import {Helper, TreeTableItemShell} from './shared/helpers/items.helper';
 
 export interface TreeTableColumn {
   id?: any; // for external identifiers, for example conditional class
@@ -6,11 +7,6 @@ export interface TreeTableColumn {
   titleTemplate?: TemplateRef<any>; // instead title string, template
   template: TemplateRef<any>;
   thClass?: string;
-}
-
-export interface TreeTableData<T> {
-  rootParentId?: number;
-  treeTableItems: TreeTableItem<T>[];
 }
 
 export interface TreeTableItem<T> {
@@ -25,14 +21,6 @@ export type SortFunction<T> = (data1: T, data2: T) => number;
 export type IsSelectedFunc<T> = (data: T) => boolean;
 export type ConditionalCellClassFunc<T> = (data: TreeTableItem<T>, column: TreeTableColumn) => string;
 
-interface TreeTableItemShell<T> {
-  item: TreeTableItem<T>;
-  parent: TreeTableItemShell<T>;
-  haveChildren: boolean;
-  level: number;
-  isVisible: boolean;
-}
-
 @Component({
   selector: 'cng-tree-table',
   templateUrl: './tree-table.component.html',
@@ -40,7 +28,7 @@ interface TreeTableItemShell<T> {
 })
 export class CngTreeTableComponent<T>  implements OnChanges {
   @Input() columns: TreeTableColumn[];
-  @Input() treeTableData: TreeTableData<T>;
+  @Input() treeTableItems: TreeTableItem<T>[];
   @Input() sortFunction: SortFunction<T>;
   @Input() isSelectedFunc: IsSelectedFunc<T>;
   @Input() conditionalCellClassFunc: ConditionalCellClassFunc<T>;
@@ -54,35 +42,28 @@ export class CngTreeTableComponent<T>  implements OnChanges {
   }
 
   ngOnChanges(changes: SimpleChanges): void {
-    if (changes.treeTableData.previousValue !== changes.treeTableData.currentValue) {
+    if (changes.treeTableItems.previousValue !== changes.treeTableItems.currentValue) {
       this.treeTableItemShells = [];
-      this.otherItems = [...this.treeTableData.treeTableItems];
-      this.insertLevelItemsFor(0, this.treeTableData.rootParentId || 0, 0);
+      this.otherItems = [...this.treeTableItems];
+      this.insertLevelItemsFor(0, null, 0);
       this.updateVisibility();
     }
   }
 
-  insertLevelItemsFor(index: number, parentOrNumber: TreeTableItemShell<T> | number, level: number) {
-    let parent = null;
-    let parentId = typeof(parentOrNumber) === 'number' ? parentOrNumber : 0;
-    if (typeof(parentOrNumber) === 'object') {
-      parent = parentOrNumber;
-      parentId = parentOrNumber.item.id;
-    }
-
-    let {levelItems, otherItems} = Helper.selectLevelItems(this.otherItems, parentId);
+  insertLevelItemsFor(index: number, parentShell: TreeTableItemShell<T>, level: number) {
+    let {levelItems, otherItems} = Helper.selectLevelItems(this.otherItems, (parentShell || {} as TreeTableItemShell<T>).item);
     if (this.sortFunction) {
       levelItems = Helper.sortItems(levelItems, this.sortFunction);
     }
 
-    const newLevelShells = Helper.itemsToShells(levelItems, level, parent);
+    const newLevelShells = Helper.itemsToShells(levelItems, level, parentShell);
     this.treeTableItemShells = Helper.arrayInsertItems(this.treeTableItemShells, index, newLevelShells);
 
     this.otherItems = [...otherItems];
-    if (newLevelShells.length > 0) { // mark parent have children
-      const parentShell = this.treeTableItemShells.find(i => i.item.id === parentId);
-      if (parentShell) { parentShell.haveChildren = true; }
+    if (newLevelShells.length > 0 && !!parentShell) { // mark parent have children
+      parentShell.haveChildren = true;
     }
+
     newLevelShells.forEach(newLevelShell => {
       // every time recalculate index because array is changing
       const shellIndex = this.treeTableItemShells.findIndex(i => i.item.id === newLevelShell.item.id);
@@ -116,48 +97,5 @@ export class CngTreeTableComponent<T>  implements OnChanges {
     this.treeTableItemShells.forEach(sh => {
       sh.isVisible = Helper.allParentsExpanded(sh);
     });
-  }
-}
-
-class Helper {
-  static sortItems<T>(items: TreeTableItem<T>[], sortFunction: SortFunction<T>): TreeTableItem<T>[] {
-    return items.sort((a: TreeTableItem<T>, b: TreeTableItem<T>) => {
-      return !!a.data && !!b.data ? sortFunction(a.data, b.data) : 0;
-    });
-  }
-
-  static allParentsExpanded<T>(shell: TreeTableItemShell<T>): boolean {
-    let parent = shell.parent;
-    while (!!parent) {
-      if (!parent.item.isExpanded) { return false; }
-      parent = parent.parent;
-    }
-    return true;
-  }
-
-  static itemsToShells<T>(items: TreeTableItem<T>[], level: number, parent: TreeTableItemShell<T>): TreeTableItemShell<T>[] {
-    const shells = items.map(item => {
-      const shell: TreeTableItemShell<T> = { item, haveChildren: false, level, isVisible: level === 0, parent };
-      return shell;
-    });
-    return shells;
-  }
-
-  static arrayInsertItems(arr: any[], index, newItems: any[]): any[] {
-    const newArr = [...arr.slice(0, index), ...newItems, ...arr.slice(index)];
-    return newArr;
-  }
-
-  static selectLevelItems<T>(items: TreeTableItem<T>[], parentId): {levelItems: TreeTableItem<T>[], otherItems: TreeTableItem<T>[]}  {
-    const levelItems: TreeTableItem<T>[] = [];
-    const otherItems: TreeTableItem<T>[] = [];
-    items.forEach(item => {
-      if (item.parentId === parentId) {
-        levelItems.push(item);
-      } else {
-        otherItems.push(item);
-      }
-    });
-    return {levelItems, otherItems};
   }
 }
