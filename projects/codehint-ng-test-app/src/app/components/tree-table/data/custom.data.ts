@@ -31,8 +31,14 @@ export class CustomData {
         data1: 'data1_3',
         data2: 'data2_3',
         data3: 'data3_3'
+      },
+      {
+        id: 4,
+        parentId: 2,
+        data1: 'data1_4',
+        data2: 'data2_4',
+        data3: 'data3_4'
       }
-
     ];
     return items;
   }

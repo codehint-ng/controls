@@ -52,6 +52,8 @@ export class CngTreeTableComponent<T>  implements OnChanges {
 
   insertLevelItemsFor(index: number, parentShell: TreeTableItemShell<T>, level: number) {
     let {levelItems, otherItems} = Helper.selectLevelItems(this.otherItems, (parentShell || {} as TreeTableItemShell<T>).item);
+    if (levelItems.length < 1) { return; }
+
     if (this.sortFunction) {
       levelItems = Helper.sortItems(levelItems, this.sortFunction);
     }
@@ -60,14 +62,8 @@ export class CngTreeTableComponent<T>  implements OnChanges {
     this.treeTableItemShells = Helper.arrayInsertItems(this.treeTableItemShells, index, newLevelShells);
 
     this.otherItems = [...otherItems];
-    if (newLevelShells.length > 0 && !!parentShell) { // mark parent have children
-      parentShell.haveChildren = true;
-    }
-
-    newLevelShells.forEach(newLevelShell => {
-      // every time recalculate index because array is changing
-      const shellIndex = this.treeTableItemShells.findIndex(i => i.item.id === newLevelShell.item.id);
-      this.insertLevelItemsFor(shellIndex + 1, newLevelShell, level + 1);
+    newLevelShells.forEach((shell) => {
+      shell.haveChildren = this.otherItems.some(i => i.parentId === shell.item.id);
     });
   }
 
@@ -77,6 +73,11 @@ export class CngTreeTableComponent<T>  implements OnChanges {
 
     shell.item.isExpanded = !shell.item.isExpanded;
     this.toggleExpandItem.emit(shell.item);
+
+    if (shell.item.isExpanded) {
+      const shellIndex = this.treeTableItemShells.findIndex(i => i.item.id === shell.item.id);
+      this.insertLevelItemsFor(shellIndex + 1, shell, shell.level + 1);
+    }
 
     this.updateVisibility();
   }
