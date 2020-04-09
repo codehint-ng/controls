@@ -1,24 +1,80 @@
-# TreeTable
+# @codehint-ng/tree-table
 
-This library was generated with [Angular CLI](https://github.com/angular/angular-cli) version 8.2.14.
+A simple component to display tree-hierarchically data in table.
 
-## Code scaffolding
+## Usage
 
-Run `ng generate component component-name --project tree-table` to generate a new component. You can also use `ng generate directive|pipe|service|class|guard|interface|enum|module --project tree-table`.
-> Note: Don't forget to add `--project tree-table` or else it will be added to the default project in your `angular.json` file. 
+1) Register the @codehint-ng/tree-table in your module:
 
-## Build
+        import { CngTreeTableModule } from '@codehint-ng/tree-table';
 
-Run `ng build tree-table` to build the project. The build artifacts will be stored in the `dist/` directory.
+        @NgModule({
+        imports: [
+            CngTreeTableModule
+            ...
+        ],
+        ...
+ 
+2) Prepare your custom tree-hierarchically data for passing it into cng-tree-table 
+component: 
 
-## Publishing
+    For example: You have some tree data like this:
+    
+        export interface CustomItem {
+            id: number;
+            parentId: number;
+            data1: string;
+            data2: string;
+            data3: string;
+        }
+        
+        myCustomData: CustomItem[] = [...];
+     
+    So you need to map it into structure TreeTableItem<T> that cng-tree-table can display, like this:
+    
+        function customDataToTreeTableItems(customData: CustomItem[])
+                : TreeTableItem<CustomItem>[] {
+                
+            const treeTableItems = (customData || []).map((customItem: CustomItem) => {
+                const item: TreeTableItem<CustomItem> = {
+                    id: customItem.id,
+                    parentId: customItem.parentId || 0,
+                    data: customItem
+                };
+                return item;
+            });
+            return treeTableItems;
+        }
+    
+        myCustomData: CustomItem[] = [...];
+        treeTableItems: TreeTableItem<CustomItem>[];
+        
+        ngOnInit() {
+            this.treeTableItems = customDataToTreeTableItems(this.myCustomData);
+            ....
+        }
+            
+        
+3) Then define displaying treeTableItems in your component template:
+ 
+        <cng-tree-table
+            [columns]="[
+                {title: 'Column1', template: tmplColumn1},
+                {title: 'Column2', template: tmplColumn2},
+                {title: 'Column3', template: tmplColumn3}
+            ]"
+            [treeTableItems]="treeTableItems"
+        >
+        </cng-tree-table>
 
-After building your library with `ng build tree-table`, go to the dist folder `cd dist/tree-table` and run `npm publish`.
+        <ng-template #tmplColumn1 let-treeTableItem>
+            {{ treeTableItem.data.data1 }}
+        </ng-template>
 
-## Running unit tests
+        <ng-template #tmplColumn2 let-treeTableItem>
+            {{ treeTableItem.data.data2 }}
+        </ng-template>
 
-Run `ng test tree-table` to execute the unit tests via [Karma](https://karma-runner.github.io).
-
-## Further help
-
-To get more help on the Angular CLI use `ng help` or go check out the [Angular CLI README](https://github.com/angular/angular-cli/blob/master/README.md).
+        <ng-template #tmplColumn3 let-treeTableItem>
+            {{ treeTableItem.data.data3 }}
+        </ng-template>

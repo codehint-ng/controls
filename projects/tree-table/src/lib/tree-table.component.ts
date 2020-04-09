@@ -51,7 +51,10 @@ export class CngTreeTableComponent<T>  implements OnChanges {
   }
 
   insertLevelItemsFor(index: number, parentShell: TreeTableItemShell<T>, level: number) {
-    let {levelItems, otherItems} = Helper.selectLevelItems(this.otherItems, (parentShell || {} as TreeTableItemShell<T>).item);
+    let {levelItems, otherItems} = Helper.selectLevelItems(
+      this.otherItems,
+      (parentShell || {} as TreeTableItemShell<T>).item
+    );
     if (levelItems.length < 1) { return; }
 
     if (this.sortFunction) {
