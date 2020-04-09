@@ -10,9 +10,10 @@ export interface TreeTableItemShell<T> {
 
 export class Helper {
   static sortItems<T>(items: TreeTableItem<T>[], sortFunction: SortFunction<T>): TreeTableItem<T>[] {
-    return items.sort((a: TreeTableItem<T>, b: TreeTableItem<T>) => {
+    const sortFunc = (a: TreeTableItem<T>, b: TreeTableItem<T>) => {
       return !!a.data && !!b.data ? sortFunction(a.data, b.data) : 0;
-    });
+    };
+    return items.sort(sortFunc);
   }
 
   static allParentsExpanded<T>(shell: TreeTableItemShell<T>): boolean {
