@@ -1,5 +1,5 @@
 import {CustomItem} from './custom.data';
-import {TreeTableItem} from '../../../../../../tree-table/src/lib/tree-table.component';
+import {TreeTableItem} from '../../../../../../tree-table/src/lib/models';
 
 
 export class TreeTableDataMapper {

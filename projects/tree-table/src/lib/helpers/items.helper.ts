@@ -1,12 +1,5 @@
-import {SortFunction, TreeTableItem} from '../../tree-table.component';
-
-export interface TreeTableItemShell<T> {
-  item: TreeTableItem<T>;
-  parent: TreeTableItemShell<T>;
-  haveChildren: boolean;
-  level: number;
-  isVisible: boolean;
-}
+import {TreeTableItemShell} from './models';
+import {SortFunction, TreeTableItem} from '../models';
 
 export class Helper {
   static sortItems<T>(items: TreeTableItem<T>[], sortFunction: SortFunction<T>): TreeTableItem<T>[] {

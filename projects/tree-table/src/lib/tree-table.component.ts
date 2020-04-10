@@ -1,25 +1,8 @@
 import {Component, EventEmitter, Input, OnInit, Output, TemplateRef} from '@angular/core';
-import {Helper, TreeTableItemShell} from './shared/helpers/items.helper';
-
-export interface TreeTableColumn {
-  id?: any; // for external identifiers, for example conditional class
-  title: string;
-  titleTemplate?: TemplateRef<any>; // instead title string, template
-  template: TemplateRef<any>;
-  thClass?: string;
-}
-
-export interface TreeTableItem<T> {
-  id: number;
-  parentId: number;
-  isExpanded?: boolean;
-  placeholder?: boolean;
-  data: T;
-}
-
-export type SortFunction<T> = (data1: T, data2: T) => number;
-export type IsSelectedFunc<T> = (data: T) => boolean;
-export type ConditionalCellClassFunc<T> = (data: TreeTableItem<T>, column: TreeTableColumn) => string;
+import {Helper} from './helpers/items.helper';
+import {TreeTableItemShell} from './helpers/models';
+import {ConditionalCellClassFunc, IsSelectedFunc, SortFunction, TreeTableColumn, TreeTableItem} from './models';
+import {SortHelper} from './helpers/sort.helper';
 
 @Component({
   selector: 'cng-tree-table',
@@ -133,9 +116,17 @@ export class CngTreeTableComponent<T> {
 
     this.treeTableItemShells = this.treeTableItemShells.filter(i => i.item.id !== id);
 
-
     this.otherItems = Helper.removeAllChildren([...this.otherItems], id);
     this.otherItems = this.otherItems
       .filter(i => i.id !== id);
+  }
+
+  sort() {
+    if (!this.sortFunction) {
+      console.warn('cng-tree-table: there is not sortFunction');
+      return;
+    }
+
+    this.treeTableItemShells = SortHelper.getSorted(this.treeTableItemShells, this.sortFunction);
   }
 }
