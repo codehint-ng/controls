@@ -1,13 +1,19 @@
 <h1>@codehint-ng/tree-table</h1>
 
+<button (click)="addData()">Add Data</button>
+<button (click)="addData2()">Add Data2</button>
+<button (click)="clearData()">Clear Data</button>
+<button (click)="removeItem()">Remove Item</button>
+<button (click)="getChildren()">Get Chioldren</button>
+
 <cng-tree-table
   [columns]="[
     {title: 'Column1', template: tmplColumn1},
     {title: 'Column2', template: tmplColumn2},
     {title: 'Column3', template: tmplColumn3}
   ]"
-  [treeTableItems]="treeTableItems"
   [sortFunction]="sortFunction"
+  (rowClick)="rowClick($event)"
 >
 </cng-tree-table>
 

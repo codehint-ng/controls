@@ -7,7 +7,7 @@ export class TreeTableDataMapper {
     const treeTableItems = (customData || []).map((customItem: CustomItem) => {
       const item: TreeTableItem<CustomItem> = {
         id: customItem.id,
-        parentId: customItem.parentId || 0,
+        parentId: customItem.parentId || null,
         data: customItem
       };
       return item;

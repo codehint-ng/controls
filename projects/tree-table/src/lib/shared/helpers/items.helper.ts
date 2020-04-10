@@ -27,7 +27,12 @@ export class Helper {
 
   static itemsToShells<T>(items: TreeTableItem<T>[], level: number, parent: TreeTableItemShell<T>): TreeTableItemShell<T>[] {
     const shells = items.map(item => {
-      const shell: TreeTableItemShell<T> = { item, haveChildren: false, level, isVisible: level === 0, parent };
+      const shell: TreeTableItemShell<T> = {
+        item,
+        haveChildren: false,
+        level,
+        isVisible: level === 0,
+        parent: parent.item.id === null ? null : parent };
       return shell;
     });
     return shells;
@@ -44,10 +49,8 @@ export class Helper {
     const levelItems: TreeTableItem<T>[] = [];
     const otherItems: TreeTableItem<T>[] = [];
 
-    const levelItemsIds = this.getLevelItemsIds(items, parent);
-
     items.forEach(item => {
-      if (levelItemsIds.includes(item.id)) {
+      if (item.parentId === parent.id) {
         levelItems.push(item);
       } else {
         otherItems.push(item);
@@ -56,17 +59,27 @@ export class Helper {
     return {levelItems, otherItems};
   }
 
-  // stable
-  static getLevelItemsIds<T>(items: TreeTableItem<T>[], parent: TreeTableItem<T>): number[] {
-    if (!parent) { // select all ids for which there are no parents, they will be the first level
-      const allIds: number[] = items.map(item => item.id);
-      const parentsIds = items.filter(i => !allIds.includes(i.parentId)).map(i => i.id);
-      if (parentsIds.length < 1) {
-        console.warn('cng-tree-table: Cannot find any root element, possible cycled hierarchy!!!');
-      }
-      return parentsIds;
-    } else {
-      return items.filter(i => i.parentId === parent.id).map(i => i.id);
-    }
+  static removeAllShellsChildren<T>(outerShells: TreeTableItemShell<T>[], parentId: number): TreeTableItemShell<T>[] {
+    let shells = outerShells;
+    const removedIds = shells
+      .filter(i => i.item.parentId === parentId).map(i => i.item.id);
+
+    removedIds.forEach((id) => {
+      shells = this.removeAllShellsChildren(shells, id);
+    });
+
+    return shells.filter(i => !removedIds.includes(i.item.id));
+  }
+
+  static removeAllChildren<T>(outerItems: TreeTableItem<T>[], parentId: number): TreeTableItem<T>[] {
+    let items = outerItems;
+    const removedIds = items
+      .filter(i => i.parentId === parentId).map(i => i.id);
+
+    removedIds.forEach((id) => {
+      items = this.removeAllChildren(items, id);
+    });
+
+    return items.filter(i => !removedIds.includes(i.id));
   }
 }
