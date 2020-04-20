@@ -36,7 +36,7 @@ export class CngHtmlCompilerComponent  implements OnChanges {
       currentComponentClass = changes.componentClass.currentValue;
     }
     let currentImports = [CommonModule];
-    if (changes.imports.currentValue) {
+    if (!!changes.imports && !!changes.imports.currentValue) {
       currentImports = [...currentImports, ...changes.imports.currentValue];
     }
     this.addComponent(currentTemplate, currentComponentClass, currentImports);
