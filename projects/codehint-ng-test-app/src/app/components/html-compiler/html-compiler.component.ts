@@ -14,7 +14,12 @@ export class HtmlCompilerComponent implements OnInit {
   constructor() {}
 
   ngOnInit(): void {
-    this.template = '<div>hello {{name}}</div> <button (click)="onEvent()">Test Event</button><br /><app-custom></app-custom>';
+    this.template = `
+        <div>hello {{name}}</div>
+        <button appCustomBackground="green" (click)="onEvent()">Test Event</button><br />
+        <app-custom></app-custom>
+    `;
+
     this.componentClass = {
       name: 'World!',
       onEvent: () => { alert('this is event'); }
