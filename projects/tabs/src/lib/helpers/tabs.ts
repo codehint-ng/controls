@@ -12,6 +12,11 @@ export class Tabs {
     this.tabs.forEach(tab => { tab.isActive = false; });
   }
 
+  public selectFirst() {
+    this.unselectTabs();
+    this._detectActive();
+  }
+
   private _detectActive() {
     if (!this.tabs.some(tab => tab.isActive)) {
       if (this.tabs[0]) {

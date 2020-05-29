@@ -21,7 +21,7 @@ A simple flexible tabs Angular component to group content with tabs.
 
         <cng-tabs>
           <cng-tab #tabFirst>First Tab Title</cng-tab>
-          <cng-tab #tabSecond>Second Tab Title</cng-tab>
+          <cng-tab #tabSecond [idHidden]="someFlag">Second Tab Title</cng-tab>
         </cng-tabs>
 
         <div [cngTabContentOf]="tabFirst">First Tab Content</div>

@@ -1,9 +1,16 @@
 <h1>@codehint-ng/tabs</h1>
 
+<div>
+  <input type="checkbox" [(ngModel)]="isVisibleThird"> is third visible
+</div>
+
 <cng-tabs>
   <cng-tab #tabFirst>First Tab</cng-tab>
-  <cng-tab #tabSecond>Second Tab</cng-tab>
+  <cng-tab #tabSecond [isHidden]="!isVisibleThird">Second Tab</cng-tab>
+  <cng-tab #tabThird>Third Tab</cng-tab>
 </cng-tabs>
 
 <div [cngTabContentOf]="tabFirst">111111</div>
 <div [cngTabContentOf]="tabSecond">222222</div>
+<div [cngTabContentOf]="tabThird">33333</div>
+

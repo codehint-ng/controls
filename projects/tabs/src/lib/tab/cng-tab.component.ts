@@ -1,21 +1,24 @@
-import {Component, ElementRef, HostBinding, HostListener, OnDestroy, OnInit} from '@angular/core';
+import {Component, ElementRef, HostBinding, HostListener, Input, OnChanges, OnDestroy, OnInit, SimpleChanges} from '@angular/core';
 import {Tabs} from '../helpers/tabs';
 import {Tab} from '../helpers/tab';
 import {Subscriptions, SubscriptionsHelper} from '../helpers/subscriptions.helper';
+import {DomSanitizer, SafeStyle} from '@angular/platform-browser';
 
 @Component({
   selector: 'cng-tab',
   templateUrl: './cng-tab.component.html',
   styleUrls: ['./cng-tab.component.scss']
 })
-export class CngTabComponent implements OnInit, OnDestroy {
+export class CngTabComponent implements OnInit, OnChanges, OnDestroy {
+  @Input() isHidden = false;
   private subs: Subscriptions = {};
   private tabs: Tabs;
   tab: Tab;
 
-  constructor(private element: ElementRef) {}
+  constructor(private element: ElementRef, private sanitizer: DomSanitizer) {}
 
   @HostBinding('class.active') activeTab = false;
+  @HostBinding('style.display') display = 'inline-block';
 
   ngOnInit() {
     this.tabs = TabsHelper.getTabs(this.element.nativeElement);
@@ -24,6 +27,15 @@ export class CngTabComponent implements OnInit, OnDestroy {
     this.subs.isActive = this.tab.isActive$.subscribe(isActive => {
       this.activeTab = isActive;
     });
+  }
+
+  ngOnChanges(changes: SimpleChanges) {
+    if (!changes.isHidden) { return; }
+    const isHidden = changes.isHidden.currentValue;
+    if (isHidden && this.activeTab) {
+      this.tabs.selectFirst();
+    }
+    this.display = isHidden ? 'none' : 'inline-block';
   }
 
   ngOnDestroy() {
