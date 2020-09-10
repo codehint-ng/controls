@@ -96,7 +96,7 @@ export class CngTreeTableComponent<T> {
     this.updateVisibility();
   }
 
-  getChildren(id: number): TreeTableItem<T>[] {
+  getChildren(id: string): TreeTableItem<T>[] {
     const fromShells = this.treeTableItemShells
       .map(i => i.item)
       .filter(i => i.parentId === id);
@@ -104,7 +104,7 @@ export class CngTreeTableComponent<T> {
     return [...fromShells, ...fromItems];
   }
 
-  removeItem(id: number) {
+  removeItem(id: string) {
     this.treeTableItemShells = Helper.removeAllShellsChildren([...this.treeTableItemShells], id);
     const shell = this.treeTableItemShells.find(i => i.item.id === id);
     if (shell && shell.parent) {

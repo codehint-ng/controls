@@ -44,7 +44,7 @@ export class TreeTableComponent implements OnInit {
   }
 
   removeItem() {
-    this.cngTreeTable.removeItem(3);
+    this.cngTreeTable.removeItem('3');
   }
 
   rowClick(item: TreeTableItem<CustomItem>) {

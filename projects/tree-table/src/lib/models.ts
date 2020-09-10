@@ -9,8 +9,8 @@ export interface TreeTableColumn {
 }
 
 export interface TreeTableItem<T> {
-  id: number;
-  parentId: number;
+  id: string;
+  parentId: string;
   isExpanded?: boolean;
   placeholder?: boolean;
   data: T;

@@ -15,7 +15,7 @@ export class SortHelper<T> {
     return this.shells;
   }
 
-  private static getShellsForLevel<T>(index: number, parentId: number) {
+  private static getShellsForLevel<T>(index: number, parentId: string) {
     let {levelShells, otherShells} = this.selectLevelShells(this.otherShells, parentId);
     if (this.sortFunction) {
       levelShells = this.sortShells(levelShells, this.sortFunction);
@@ -29,7 +29,7 @@ export class SortHelper<T> {
     });
   }
 
-  private static selectLevelShells<T>(shells: TreeTableItemShell<T>[], parentId: number)
+  private static selectLevelShells<T>(shells: TreeTableItemShell<T>[], parentId: string)
                 : {levelShells: TreeTableItemShell<T>[], otherShells: TreeTableItemShell<T>[]}  {
       const levelShells: TreeTableItemShell<T>[] = [];
       const otherShells: TreeTableItemShell<T>[] = [];

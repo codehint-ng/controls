@@ -52,7 +52,7 @@ export class Helper {
     return {levelItems, otherItems};
   }
 
-  static removeAllShellsChildren<T>(outerShells: TreeTableItemShell<T>[], parentId: number): TreeTableItemShell<T>[] {
+  static removeAllShellsChildren<T>(outerShells: TreeTableItemShell<T>[], parentId: string): TreeTableItemShell<T>[] {
     let shells = outerShells;
     const removedIds = shells
       .filter(i => i.item.parentId === parentId).map(i => i.item.id);
@@ -64,7 +64,7 @@ export class Helper {
     return shells.filter(i => !removedIds.includes(i.item.id));
   }
 
-  static removeAllChildren<T>(outerItems: TreeTableItem<T>[], parentId: number): TreeTableItem<T>[] {
+  static removeAllChildren<T>(outerItems: TreeTableItem<T>[], parentId: string): TreeTableItem<T>[] {
     let items = outerItems;
     const removedIds = items
       .filter(i => i.parentId === parentId).map(i => i.id);
