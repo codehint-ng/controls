@@ -93,7 +93,24 @@ export class CngTreeTableComponent<T> {
       }
     });
 
+    // fix have children for already added items, but reseted above adding code
+    this.treeTableItemShells.forEach(shell => {
+      if (!shell.haveChildren) {
+        shell.haveChildren = this.isExistsChildrenFor(shell.item.id);
+      }
+    });
+
     this.updateVisibility();
+  }
+
+  private isExistsChildrenFor(itemId: string): boolean {
+    return this.treeTableItemShells
+      .some(i => {
+        if (!i) { return false; }
+        if (!i.parent) { return false; }
+        if (!i.parent.item) { return false; }
+        return i.parent.item.id === itemId;
+      });
   }
 
   getChildren(id: string): TreeTableItem<T>[] {

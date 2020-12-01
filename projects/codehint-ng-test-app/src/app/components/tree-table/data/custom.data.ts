@@ -15,6 +15,47 @@ export class CustomData {
         id: '1',
         parentId: null,
         data1: 'data1_1',
+        data2: 'data1_2',
+        data3: 'data1_3'
+      },
+      {
+        id: '2',
+        parentId: '1',
+        data1: 'data2_1',
+        data2: 'data2_2',
+        data3: 'data2_3'
+      }
+    ];
+    return items;
+  }
+
+  static getData2(): CustomItem[]  {
+    const items: CustomItem[] = [
+      {
+        id: '3',
+        parentId: null,
+        data1: 'data3_1',
+        data2: 'data3_2',
+        data3: 'data3_3'
+      },
+      {
+        id: '4',
+        parentId: '3',
+        data1: 'data4_1',
+        data2: 'data4_2',
+        data3: 'data4_3'
+      }
+    ];
+    return items;
+  }
+
+  /*
+  static getData(): CustomItem[]  {
+    const items: CustomItem[] = [
+      {
+        id: '1',
+        parentId: null,
+        data1: 'data1_1',
         data2: 'data2_1',
         data3: 'data3_1'
       },
@@ -46,6 +87,13 @@ export class CustomData {
         data2: 'data2_4',
         data3: 'data3_4'
       },
+      {
+        id: '4',
+        parentId: '4',
+        data1: 'data1_5',
+        data2: 'data2_5',
+        data3: 'data3_5'
+      },
     ];
     return items;
   }
@@ -69,5 +117,5 @@ export class CustomData {
 
     ];
     return items;
-  }
+  }*/
 }
