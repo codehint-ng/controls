@@ -38,6 +38,9 @@ table {
               -webkit-transform: rotate(45deg);
             }
           }
+          &.vis-hidden {
+            visibility: hidden;
+          }
         }
       }
     }

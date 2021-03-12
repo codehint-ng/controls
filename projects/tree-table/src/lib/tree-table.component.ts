@@ -16,6 +16,7 @@ export class CngTreeTableComponent<T> {
   @Input() conditionalCellClassFunc: ConditionalCellClassFunc<T>;
   @Output() toggleExpandItem = new EventEmitter<TreeTableItem<T>>();
   @Output() rowClick = new EventEmitter<TreeTableItem<T>>();
+  @Input() tableClass = '';
 
   treeTableItemShells: TreeTableItemShell<T>[] = [];
   otherItems: TreeTableItem<T>[] = []; // to avoid unexpected infinite looping, if parent ids errored with never-ending cycle.
