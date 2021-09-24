@@ -1,4 +1,3 @@
-
 {
   "name": "@codehint-ng/ng-controls",
   "version": "1.0.0",
@@ -12,7 +11,9 @@
     "dev": "ng serve",
     "build_lib": "ng build html-compiler",
     "npm_pack": "cd dist/html-compiler && npm pack",
-    "package": "npm run build_lib && npm run npm_pack"
+    "package": "npm run build_lib && npm run npm_pack",
+    "build-tree-table": "ng build tree-table",
+    "publish-tree-table": "cd dist/tree-table && npm publish"
   },
   "keywords": [
     "Angular"
