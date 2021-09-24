@@ -1,6 +1,6 @@
 {
   "name": "@codehint-ng/tabs",
-  "version": "1.0.3",
+  "version": "1.0.4",
   "license": "MIT",
   "keywords": [
     "Angular"
@@ -10,7 +10,7 @@
     "url": "https://github.com/codehint-ng/ng-controls"
   },
   "peerDependencies": {
-    "@angular/common": "^8.2.14",
-    "@angular/core": "^8.2.14"
+    "@angular/common": "~9.1.13",
+    "@angular/core": "~9.1.13"
   }
 }

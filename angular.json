@@ -22,7 +22,7 @@
             "main": "projects/codehint-ng-test-app/src/main.ts",
             "polyfills": "projects/codehint-ng-test-app/src/polyfills.ts",
             "tsConfig": "projects/codehint-ng-test-app/tsconfig.app.json",
-            "aot": false,
+            "aot": true,
             "assets": [
               "projects/codehint-ng-test-app/src/favicon.ico",
               "projects/codehint-ng-test-app/src/assets"
@@ -45,7 +45,6 @@
               "sourceMap": false,
               "extractCss": true,
               "namedChunks": false,
-              "aot": true,
               "extractLicenses": true,
               "vendorChunk": false,
               "buildOptimizer": true,
@@ -136,6 +135,11 @@
           "options": {
             "tsConfig": "projects/tabs/tsconfig.lib.json",
             "project": "projects/tabs/ng-package.json"
+          },
+          "configurations": {
+            "production": {
+              "tsConfig": "projects/tabs/tsconfig.lib.prod.json"
+            }
           }
         },
         "test": {
@@ -171,6 +175,11 @@
           "options": {
             "tsConfig": "projects/html-compiler/tsconfig.lib.json",
             "project": "projects/html-compiler/ng-package.json"
+          },
+          "configurations": {
+            "production": {
+              "tsConfig": "projects/html-compiler/tsconfig.lib.prod.json"
+            }
           }
         },
         "test": {
@@ -206,6 +215,11 @@
           "options": {
             "tsConfig": "projects/dialog/tsconfig.lib.json",
             "project": "projects/dialog/ng-package.json"
+          },
+          "configurations": {
+            "production": {
+              "tsConfig": "projects/dialog/tsconfig.lib.prod.json"
+            }
           }
         },
         "test": {
@@ -241,6 +255,11 @@
           "options": {
             "tsConfig": "projects/tree-table/tsconfig.lib.json",
             "project": "projects/tree-table/ng-package.json"
+          },
+          "configurations": {
+            "production": {
+              "tsConfig": "projects/tree-table/tsconfig.lib.prod.json"
+            }
           }
         },
         "test": {
@@ -266,5 +285,8 @@
       }
     }
   },
-  "defaultProject": "codehint-ng-test-app"
+  "defaultProject": "codehint-ng-test-app",
+  "cli": {
+    "analytics": false
+  }
 }
