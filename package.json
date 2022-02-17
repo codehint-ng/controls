@@ -12,7 +12,6 @@
     "build_lib": "ng build html-compiler",
     "npm_pack": "cd dist/html-compiler && npm pack",
     "package": "npm run build_lib && npm run npm_pack",
-
     "build-tree-table": "ng build tree-table",
     "publish-tree-table": "cd dist/tree-table && npm publish"
   },
@@ -42,9 +41,9 @@
     "@angular/cli": "~9.1.15",
     "@angular/compiler-cli": "~9.1.13",
     "@angular/language-service": "~9.1.13",
-    "@types/node": "~8.9.4",
     "@types/jasmine": "~3.3.8",
     "@types/jasminewd2": "~2.0.3",
+    "@types/node": "~8.9.4",
     "codelyzer": "^5.0.0",
     "jasmine-core": "~3.4.0",
     "jasmine-spec-reporter": "~4.2.1",
@@ -56,7 +55,6 @@
     "ng-packagr": "^9.1.5",
     "protractor": "~5.4.0",
     "ts-node": "~7.0.0",
-    "tsickle": "^0.37.0",
     "tslint": "~5.15.0",
     "typescript": "~3.8.3"
   }
