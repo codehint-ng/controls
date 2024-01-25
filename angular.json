@@ -22,7 +22,6 @@
             "main": "projects/codehint-ng-test-app/src/main.ts",
             "polyfills": "projects/codehint-ng-test-app/src/polyfills.ts",
             "tsConfig": "projects/codehint-ng-test-app/tsconfig.app.json",
-            "aot": true,
             "assets": [
               "projects/codehint-ng-test-app/src/favicon.ico",
               "projects/codehint-ng-test-app/src/assets"
@@ -30,7 +29,13 @@
             "styles": [
               "projects/codehint-ng-test-app/src/styles.scss"
             ],
-            "scripts": []
+            "scripts": [],
+            "vendorChunk": true,
+            "extractLicenses": false,
+            "buildOptimizer": false,
+            "sourceMap": true,
+            "optimization": false,
+            "namedChunks": true
           },
           "configurations": {
             "production": {
@@ -60,7 +65,8 @@
                 }
               ]
             }
-          }
+          },
+          "defaultConfiguration": ""
         },
         "serve": {
           "builder": "@angular-devkit/build-angular:dev-server",
@@ -94,19 +100,6 @@
               "projects/codehint-ng-test-app/src/styles.scss"
             ],
             "scripts": []
-          }
-        },
-        "lint": {
-          "builder": "@angular-devkit/build-angular:tslint",
-          "options": {
-            "tsConfig": [
-              "projects/codehint-ng-test-app/tsconfig.app.json",
-              "projects/codehint-ng-test-app/tsconfig.spec.json",
-              "projects/codehint-ng-test-app/e2e/tsconfig.json"
-            ],
-            "exclude": [
-              "**/node_modules/**"
-            ]
           }
         },
         "e2e": {
@@ -148,18 +141,6 @@
             "tsConfig": "projects/tabs/tsconfig.spec.json",
             "karmaConfig": "projects/tabs/karma.conf.js"
           }
-        },
-        "lint": {
-          "builder": "@angular-devkit/build-angular:tslint",
-          "options": {
-            "tsConfig": [
-              "projects/tabs/tsconfig.lib.json",
-              "projects/tabs/tsconfig.spec.json"
-            ],
-            "exclude": [
-              "**/node_modules/**"
-            ]
-          }
         }
       }
     },
@@ -187,18 +168,6 @@
             "main": "projects/html-compiler/src/test.ts",
             "tsConfig": "projects/html-compiler/tsconfig.spec.json",
             "karmaConfig": "projects/html-compiler/karma.conf.js"
-          }
-        },
-        "lint": {
-          "builder": "@angular-devkit/build-angular:tslint",
-          "options": {
-            "tsConfig": [
-              "projects/html-compiler/tsconfig.lib.json",
-              "projects/html-compiler/tsconfig.spec.json"
-            ],
-            "exclude": [
-              "**/node_modules/**"
-            ]
           }
         }
       }
@@ -228,18 +197,6 @@
             "tsConfig": "projects/dialog/tsconfig.spec.json",
             "karmaConfig": "projects/dialog/karma.conf.js"
           }
-        },
-        "lint": {
-          "builder": "@angular-devkit/build-angular:tslint",
-          "options": {
-            "tsConfig": [
-              "projects/dialog/tsconfig.lib.json",
-              "projects/dialog/tsconfig.spec.json"
-            ],
-            "exclude": [
-              "**/node_modules/**"
-            ]
-          }
         }
       }
     },
@@ -268,23 +225,10 @@
             "tsConfig": "projects/tree-table/tsconfig.spec.json",
             "karmaConfig": "projects/tree-table/karma.conf.js"
           }
-        },
-        "lint": {
-          "builder": "@angular-devkit/build-angular:tslint",
-          "options": {
-            "tsConfig": [
-              "projects/tree-table/tsconfig.lib.json",
-              "projects/tree-table/tsconfig.spec.json"
-            ],
-            "exclude": [
-              "**/node_modules/**"
-            ]
-          }
         }
       }
     }
   },
-  "defaultProject": "codehint-ng-test-app",
   "cli": {
     "analytics": false
   }

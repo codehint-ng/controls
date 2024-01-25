@@ -1,0 +1,6 @@
+npm login
+
+https://www.npmjs.com/package/@codehint-ng/tree-table
+
+mazhekin
+mazhekin@gmail.com

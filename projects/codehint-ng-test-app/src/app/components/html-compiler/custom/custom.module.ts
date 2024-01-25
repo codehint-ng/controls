@@ -4,19 +4,16 @@ import {CustomComponent} from './custom.component';
 import {CustomBackgroundDirective} from './custom-red-back.directive';
 
 @NgModule({
-  imports: [
-    CommonModule
-  ],
-  declarations: [
-    CustomBackgroundDirective,
-    CustomComponent
-  ],
-  entryComponents: [
-    CustomComponent
-  ],
-  exports: [
-    CustomBackgroundDirective,
-    CustomComponent
-  ]
+    imports: [
+        CommonModule
+    ],
+    declarations: [
+        CustomBackgroundDirective,
+        CustomComponent
+    ],
+    exports: [
+        CustomBackgroundDirective,
+        CustomComponent
+    ]
 })
 export class CustomModule { }
