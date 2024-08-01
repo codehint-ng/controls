@@ -15,12 +15,15 @@
       "prefix": "app",
       "architect": {
         "build": {
-          "builder": "@angular-devkit/build-angular:browser",
+          "builder": "@angular-devkit/build-angular:application",
           "options": {
-            "outputPath": "dist/codehint-ng-test-app",
+            "outputPath": {
+              "base": "dist/codehint-ng-test-app"
+            },
             "index": "projects/codehint-ng-test-app/src/index.html",
-            "main": "projects/codehint-ng-test-app/src/main.ts",
-            "polyfills": "projects/codehint-ng-test-app/src/polyfills.ts",
+            "polyfills": [
+              "projects/codehint-ng-test-app/src/polyfills.ts"
+            ],
             "tsConfig": "projects/codehint-ng-test-app/tsconfig.app.json",
             "assets": [
               "projects/codehint-ng-test-app/src/favicon.ico",
@@ -30,12 +33,11 @@
               "projects/codehint-ng-test-app/src/styles.scss"
             ],
             "scripts": [],
-            "vendorChunk": true,
             "extractLicenses": false,
-            "buildOptimizer": false,
             "sourceMap": true,
             "optimization": false,
-            "namedChunks": true
+            "namedChunks": true,
+            "browser": "projects/codehint-ng-test-app/src/main.ts"
           },
           "configurations": {
             "production": {
@@ -50,8 +52,6 @@
               "sourceMap": false,
               "namedChunks": false,
               "extractLicenses": true,
-              "vendorChunk": false,
-              "buildOptimizer": true,
               "budgets": [
                 {
                   "type": "initial",

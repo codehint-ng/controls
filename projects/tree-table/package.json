@@ -1,6 +1,6 @@
 {
   "name": "@codehint-ng/tree-table",
-  "version": "17.0.0",
+  "version": "18.0.0",
   "license": "MIT",
   "keywords": [
     "Angular"
@@ -13,7 +13,7 @@
     "tslib": "^2.0.0"
   },
   "peerDependencies": {
-    "@angular/common": "~17.3.12",
-    "@angular/core": "~17.3.12"
+    "@angular/common": "~18.1.3",
+    "@angular/core": "~18.1.3"
   }
 }
