@@ -56,7 +56,7 @@ export class CngHtmlCompilerComponent  implements OnChanges {
     // [BrowserModule, CommonModule]})(TemplateModule);
     const TemplateModule = NgModule({
       declarations: [TemplateComponent],
-      entryComponents: [TemplateComponent],
+      //entryComponents: [TemplateComponent],
       imports: [...imports]})(class {});
 
     const module = this.compiler.compileModuleAndAllComponentsSync(TemplateModule);
