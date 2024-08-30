@@ -13,7 +13,7 @@
   </thead>
 
   <tbody>
-  <tr [ngClass]="{'selected': isSelected(shell)}"
+  <tr [ngClass]="{'selected': (isSelected$(shell) | async)}"
       *ngFor="let shell of treeTableItemShells"
       [hidden]="!shell.isVisible" (click)="localRowClick(shell)">
 

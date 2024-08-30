@@ -1,4 +1,5 @@
 import {TemplateRef} from '@angular/core';
+import {Observable} from 'rxjs';
 
 export interface TreeTableColumn {
   id?: any; // for external identifiers, for example conditional class
@@ -17,5 +18,5 @@ export interface TreeTableItem<T> {
 }
 
 export type SortFunction<T> = (data1: T, data2: T) => number;
-export type IsSelectedFunc<T> = (data: T) => boolean;
+export type IsSelectedFunc$<T> = (data: T) => Observable<boolean>;
 export type ConditionalCellClassFunc<T> = (data: TreeTableItem<T>, column: TreeTableColumn) => string;

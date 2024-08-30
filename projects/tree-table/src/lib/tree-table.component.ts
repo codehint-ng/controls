@@ -1,8 +1,9 @@
 import {Component, EventEmitter, Input, OnInit, Output, TemplateRef} from '@angular/core';
 import {Helper} from './helpers/items.helper';
 import {TreeTableItemShell} from './helpers/models';
-import {ConditionalCellClassFunc, IsSelectedFunc, SortFunction, TreeTableColumn, TreeTableItem} from './models';
+import {ConditionalCellClassFunc, IsSelectedFunc$, SortFunction, TreeTableColumn, TreeTableItem} from './models';
 import {SortHelper} from './helpers/sort.helper';
+import {Observable, of} from 'rxjs';
 
 @Component({
   selector: 'cng-tree-table',
@@ -12,7 +13,7 @@ import {SortHelper} from './helpers/sort.helper';
 export class CngTreeTableComponent<T> {
   @Input() columns: TreeTableColumn[];
   @Input() sortFunction: SortFunction<T>;
-  @Input() isSelectedFunc: IsSelectedFunc<T>;
+  @Input() isSelectedFunc$: IsSelectedFunc$<T>;
   @Input() conditionalCellClassFunc: ConditionalCellClassFunc<T>;
   @Output() toggleExpandItem = new EventEmitter<TreeTableItem<T>>();
   @Output() rowClick = new EventEmitter<TreeTableItem<T>>();
@@ -25,14 +26,12 @@ export class CngTreeTableComponent<T> {
   }
 
   insertLevelItemsFor(index: number, parentShell: TreeTableItemShell<T>, level: number) {
-    let {levelItems, otherItems} = Helper.selectLevelItems(this.otherItems, parentShell.item);
+    const {levelItems, otherItems} = Helper.selectLevelItems(this.otherItems, parentShell.item);
     if (levelItems.length < 1) { return; }
 
-    if (this.sortFunction) {
-      levelItems = Helper.sortItems(levelItems, this.sortFunction);
-    }
+    const levelItems2 = this.sortFunction ? Helper.sortItems(levelItems, this.sortFunction) : levelItems;
 
-    const newLevelShells = Helper.itemsToShells(levelItems, level, parentShell);
+    const newLevelShells = Helper.itemsToShells(levelItems2, level, parentShell);
     this.treeTableItemShells = Helper.arrayInsertItems(this.treeTableItemShells, index, newLevelShells);
 
     this.otherItems = [...otherItems];
@@ -60,12 +59,12 @@ export class CngTreeTableComponent<T> {
     this.rowClick.emit(shell.item);
   }
 
-  isSelected(shell: TreeTableItemShell<T>): boolean {
+  isSelected$(shell: TreeTableItemShell<T>): Observable<boolean> {
     const data = shell.item.data;
-    if (data && this.isSelectedFunc) {
-      return this.isSelectedFunc(data);
+    if (data && this.isSelectedFunc$) {
+      return this.isSelectedFunc$(data);
     }
-    return false;
+    return of(false);
   }
 
   private updateVisibility() {
